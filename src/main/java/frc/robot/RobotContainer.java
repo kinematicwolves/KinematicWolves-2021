@@ -106,11 +106,23 @@ public class RobotContainer {
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
-    m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem)); 
-    m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem));
-    m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem));
-    m_yButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem));
-    m_r2Button.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
+    m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem)); // Works
+    m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem)); // Does not work (10/9)
+    m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem)); // Does not work (10/9)
+    /* 
+    Troubleshooting the MoveLowerConveyor
+
+    - We think the commands being sent to the controller are correct
+    - Next question: is the controller recieving them?
+      - Look at controller light, is it responding when you try to move the lower conveyor?
+        - If it isn't, then might be the wrong CAN ID in constants.java. Verify CAN id using pheonix tuner.
+        - It might not be connected to the can network.
+        - In pheonix tuner, check the firmware versions of talons, make sure they are up to date.
+      If it is recieving the commands, we maybe need to look at code a little harder.
+    */
+
+    m_yButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem)); // Works
+    m_r2Button.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // Does not work (10/9)
   
     
     // Driver Controller
@@ -123,12 +135,12 @@ public class RobotContainer {
 
     // d_yButton.whenPressed(new AutonLineUpShootBall(m_driveTrain,  m_visionSubsystem,
     // m_shooterSubsystem, m_conveyorSubsystem));
-    d_aButton.whenPressed(new TurnLimelightOff(m_visionSubsystem));
-    d_aButton.whenPressed(new ShiftGear(m_driveTrain));       
+    d_aButton.whenPressed(new TurnLimelightOff(m_visionSubsystem)); // not sure
+    d_aButton.whenPressed(new ShiftGear(m_driveTrain));  // works     
     //d_xButton.whileHeld(new IntakeBall(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    d_xButton.whileHeld(new IntakeBall(m_conveyorSubsystem, 0.8, 0.6)); 
+    d_xButton.whileHeld(new IntakeBall(m_conveyorSubsystem, 0.8, 0.6)); // not sure
  
-    d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem)); // works
 
   }
 
