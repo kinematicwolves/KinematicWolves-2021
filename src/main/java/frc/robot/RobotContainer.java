@@ -22,6 +22,7 @@ import frc.robot.commands.ShiftGear;
 import frc.robot.commands.ShootBallSequence;
 import frc.robot.commands.TurnLeftLineUp;
 import frc.robot.commands.TurnLimelightOff;
+import frc.robot.commands.TurnLimelightOn;
 import frc.robot.commands.TurnRightLineUp;
 import frc.robot.commands.AutonLineUpShootBall;
 import frc.robot.commands.RunIntake;
@@ -92,7 +93,7 @@ public class RobotContainer {
     /**
      * Declare buttons/controller inputs
      * 
-     * naming convention: d_* is diver controller, m_* is manipulator controller
+     * naming convention: d_* is driver controller, m_* is manipulator controller
      */
 
     //final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
@@ -107,8 +108,8 @@ public class RobotContainer {
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
     m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem)); // Works
-    m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem)); // Does not work (10/9)
-    m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem)); // Does not work (10/9)
+    m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem));
+    m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem)); //need to add negative values
     /* 
     Troubleshooting the MoveLowerConveyor
 
@@ -132,6 +133,9 @@ public class RobotContainer {
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
     // final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
     // final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
+    final JoystickButton d_r1Button = new JoystickButton(driverController, Constants.RB_BUTTON);
+    final JoystickButton d_r2Button = new JoystickButton(driverController, Constants.R1);
+
 
     // d_yButton.whenPressed(new AutonLineUpShootBall(m_driveTrain,  m_visionSubsystem,
     // m_shooterSubsystem, m_conveyorSubsystem));
@@ -139,8 +143,10 @@ public class RobotContainer {
     d_aButton.whenPressed(new ShiftGear(m_driveTrain));  // works     
     //d_xButton.whileHeld(new IntakeBall(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     d_xButton.whileHeld(new IntakeBall(m_conveyorSubsystem, 0.8, 0.6)); // not sure
- 
+    
     d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem)); // works
+    d_r1Button.whenPressed(new TurnLimelightOn(m_visionSubsystem));
+    d_r2Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
 
   }
 

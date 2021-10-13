@@ -9,6 +9,7 @@ public class MoveLowerConveyor extends CommandBase {
 
     // The subsytem command runs on the following:
     private final ConveyorSubsystem m_conveyorSubsystem;
+    double m_Speed;
 
   public MoveLowerConveyor(ConveyorSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -19,7 +20,8 @@ public class MoveLowerConveyor extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_conveyorSubsystem.move_lower_conveyor(0.6);
+    m_conveyorSubsystem.override_Lower_conveyor(0.6);
+    m_conveyorSubsystem.override_Lower_conveyor(m_Speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
