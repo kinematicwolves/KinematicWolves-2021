@@ -21,7 +21,7 @@ public class MoveLowerConveyor extends CommandBase {
   @Override
   public void initialize() {
     m_conveyorSubsystem.override_Lower_conveyor(0.6);
-    m_conveyorSubsystem.override_Lower_conveyor(m_Speed);
+  //  m_conveyorSubsystem.override_Lower_conveyor(m_Speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,7 +32,7 @@ public class MoveLowerConveyor extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_conveyorSubsystem.move_lower_conveyor(0);
+    m_conveyorSubsystem.override_Lower_conveyor(0);
   }
 
   // Returns true when the command should end.

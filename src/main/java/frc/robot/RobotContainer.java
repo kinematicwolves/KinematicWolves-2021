@@ -20,6 +20,7 @@ import frc.robot.commands.ReverseConveyors;
 import frc.robot.commands.SequentialIntakeBall;
 import frc.robot.commands.ShiftGear;
 import frc.robot.commands.ShootBall;
+import frc.robot.commands.ShootBallSequence;
 import frc.robot.commands.TurnLeftLineUp;
 import frc.robot.commands.TurnLimelightOff;
 import frc.robot.commands.TurnLimelightOn;
@@ -106,10 +107,11 @@ public class RobotContainer {
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
-    m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem)); // Works
+    m_aButton.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // Works
     m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem));
     m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem)); //need to add negative values
-    /* 
+    m_r2Button.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
+    /*
     Troubleshooting the MoveLowerConveyor
 
     - We think the commands being sent to the controller are correct
