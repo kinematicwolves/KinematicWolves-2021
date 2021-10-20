@@ -19,7 +19,7 @@ import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ReverseConveyors;
 import frc.robot.commands.SequentialIntakeBall;
 import frc.robot.commands.ShiftGear;
-import frc.robot.commands.ShootBallSequence;
+import frc.robot.commands.ShootBall;
 import frc.robot.commands.TurnLeftLineUp;
 import frc.robot.commands.TurnLimelightOff;
 import frc.robot.commands.TurnLimelightOn;
@@ -33,7 +33,6 @@ import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.commands.lastminutecommands.*;
 import frc.robot.commands.MoveLowerConveyor;
-import frc.robot.commands.lastminutecommands.MoveTopConveyor;
 import frc.robot.commands.IntakeBall;
 
 
@@ -122,9 +121,9 @@ public class RobotContainer {
       If it is recieving the commands, we maybe need to look at code a little harder.
     */
 
-    m_yButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem)); // Works
-    m_r2Button.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // Does not work (10/9)
-  
+    //m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // works 
+    //m_r2Button.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // Does not work (10/9)
+    m_yButton.whileHeld(new MoveIntakeAndLowerConveyor(m_conveyorSubsystem));
     
     // Driver Controller
  
@@ -133,9 +132,9 @@ public class RobotContainer {
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
     // final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
     // final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
-    final JoystickButton d_r1Button = new JoystickButton(driverController, Constants.RB_BUTTON);
+    final JoystickButton d_r1Button = new JoystickButton(driverController, Constants.R2);
     final JoystickButton d_r2Button = new JoystickButton(driverController, Constants.R1);
-
+  
 
     // d_yButton.whenPressed(new AutonLineUpShootBall(m_driveTrain,  m_visionSubsystem,
     // m_shooterSubsystem, m_conveyorSubsystem));
