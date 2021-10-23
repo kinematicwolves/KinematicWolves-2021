@@ -19,9 +19,11 @@ import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ReverseConveyors;
 import frc.robot.commands.SequentialIntakeBall;
 import frc.robot.commands.ShiftGear;
+import frc.robot.commands.ShootBall;
 import frc.robot.commands.ShootBallSequence;
 import frc.robot.commands.TurnLeftLineUp;
 import frc.robot.commands.TurnLimelightOff;
+import frc.robot.commands.TurnLimelightOn;
 import frc.robot.commands.TurnRightLineUp;
 import frc.robot.commands.AutonLineUpShootBall;
 import frc.robot.commands.RunIntake;
@@ -32,7 +34,6 @@ import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.commands.lastminutecommands.*;
 import frc.robot.commands.MoveLowerConveyor;
-import frc.robot.commands.lastminutecommands.MoveTopConveyor;
 import frc.robot.commands.IntakeBall;
 
 
@@ -92,7 +93,7 @@ public class RobotContainer {
     /**
      * Declare buttons/controller inputs
      * 
-     * naming convention: d_* is diver controller, m_* is manipulator controller
+     * naming convention: d_* is driver controller, m_* is manipulator controller
      */
 
     //final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
@@ -102,16 +103,29 @@ public class RobotContainer {
     // final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
     // final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
     final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
-    final JoystickButton m_r2Button = new JoystickButton(manipulatorController, Constants.R2);
+    final JoystickButton m_r1Button = new JoystickButton(manipulatorController, Constants.R1);
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
-    m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem)); 
-    m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem));
-    m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem));
-    m_yButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem));
-    m_r2Button.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
-  
+    m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, 0.6)); // Works
+    m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, 0.6));
+    m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, -0.6)); //need to add negative values
+    m_r1Button.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
+    /*
+    Troubleshooting the MoveLowerConveyor
+
+    - We think the commands being sent to the controller are correct
+    - Next question: is the controller recieving them?
+      - Look at controller light, is it responding when you try to move the lower conveyor?
+        - If it isn't, then might be the wrong CAN ID in constants.java. Verify CAN id using pheonix tuner.
+        - It might not be connected to the can network.
+        - In pheonix tuner, check the firmware versions of talons, make sure they are up to date.
+      If it is recieving the commands, we maybe need to look at code a little harder.
+    */
+
+    //m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // works 
+    //m_r2Button.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // Does not work (10/9)
+    m_yButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, 0.6));
     
     // Driver Controller
  
@@ -120,15 +134,20 @@ public class RobotContainer {
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
     // final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
     // final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
+    final JoystickButton d_r1Button = new JoystickButton(driverController, Constants.R1);
+    final JoystickButton d_r2Button = new JoystickButton(driverController, Constants.R2);
+    final JoystickButton d_l2Button = new JoystickButton(driverController, Constants.L1);
 
     // d_yButton.whenPressed(new AutonLineUpShootBall(m_driveTrain,  m_visionSubsystem,
     // m_shooterSubsystem, m_conveyorSubsystem));
-    d_aButton.whenPressed(new TurnLimelightOff(m_visionSubsystem));
-    d_aButton.whenPressed(new ShiftGear(m_driveTrain));       
+    d_aButton.whileHeld(new RunIntake(m_conveyorSubsystem));// not sure
+    d_r1Button.whenPressed(new ShiftGear(m_driveTrain));  // works     
     //d_xButton.whileHeld(new IntakeBall(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    d_xButton.whileHeld(new IntakeBall(m_conveyorSubsystem, 0.8, 0.6)); 
- 
-    d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_xButton.whileHeld(new IntakeBall(m_conveyorSubsystem, 0.8, 0.6)); // not sure
+    
+    d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem)); // works
+    //d_r1Button.whenPressed(new TurnLimelightOn(m_visionSubsystem));
+    d_r2Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
 
   }
 

@@ -30,14 +30,14 @@ public final class Constants {
     public static final int B_BUTTON = 2;
     public static final int X_BUTTON = 3;
     public static final int Y_BUTTON = 4;
-    public static final int D_PAD_UP = 5;
-    public static final int D_PAD_RIGHT = 6;
+    public static final int D_PAD_UP = 11;
+    public static final int D_PAD_RIGHT = 12;
     public static final int D_PAD_DOWN = 7;
     public static final int D_PAD_LEFT = 8;
     public static final int L2 = 9;
     public static final int R2 = 10;
-    public static final int L1 = 11;
-    public static final int R1 = 12;
+    public static final int L1 = 5;
+    public static final int R1 = 6;
 
     // Definition of joystick axes variables for a controller joystick
     public static final int left_x_axis = 0;

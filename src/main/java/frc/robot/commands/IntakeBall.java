@@ -21,7 +21,7 @@ public class IntakeBall extends CommandBase {
   public IntakeBall(ConveyorSubsystem conveyorSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
     // Do we need the intake wheel to spin with this command?
     this.intakeWheelSpeed = intakeWheelSpeed;
-    //this.conveyorSpeed = conveyorSpeed;
+    this.conveyorSpeed = conveyorSpeed;
     m_conveyorSubsystem = conveyorSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -31,6 +31,8 @@ public class IntakeBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_conveyorSubsystem.move_intake_motor(intakeWheelSpeed);
+    m_conveyorSubsystem.override_Lower_conveyor(conveyorSpeed);
     // Same question, do we need the intake wheel to spin?
   }
 
