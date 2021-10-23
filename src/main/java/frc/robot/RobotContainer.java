@@ -110,7 +110,7 @@ public class RobotContainer {
     m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, 0.6)); // Works
     m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, 0.6));
     m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, -0.6)); //need to add negative values
-    m_r1Button.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
+    m_r1Button.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
     /*
     Troubleshooting the MoveLowerConveyor
 

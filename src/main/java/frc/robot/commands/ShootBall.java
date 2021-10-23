@@ -24,41 +24,45 @@ public class ShootBall extends CommandBase {
   private final ShooterSubsystem m_shooterSubsystem;
   private final VisionSubsystem m_visionSubsystem;
   private final ConveyorSubsystem m_conveyorSubsystem;
+  private double m_timer;
 
   public ShootBall(ShooterSubsystem shooterSubsystem, VisionSubsystem visionSubsystem, ConveyorSubsystem conveyorSubsystem ) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_conveyorSubsystem = conveyorSubsystem;
     m_shooterSubsystem = shooterSubsystem;
     m_visionSubsystem = visionSubsystem;
+    
     addRequirements(m_shooterSubsystem);
     addRequirements(m_visionSubsystem);
-    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    double speed = 0.75;  
+    m_timer = 0;
 
-    m_conveyorSubsystem.move_top_conveyor(Constants.UPPER_CONVEYOR_SPEED);
-    m_conveyorSubsystem.override_Lower_conveyor(Constants.UPPER_CONVEYOR_SPEED);
-    
+    m_shooterSubsystem.shootBall(speed);
     // double distance = m_visionSubsystem.getDistance(); // TODO: Units
     // double distance = 10; // feet
     // double speed = Utilities.linearInterpolation(Constants.distances, Constants.speeds, distance);
     
-    double speed = 0.75;  
+    
     
     // System.out.print("Speed calculated by table:");
     // System.out.print(speed);
     // double speed = getInterpolatedSpeed;
-    
-    m_shooterSubsystem.shootBall(speed);
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_timer += 20; // add 20 ms on every call of scheduler
+    if (m_timer > 1500){
+      m_conveyorSubsystem.move_top_conveyor(Constants.UPPER_CONVEYOR_SPEED);
+      m_conveyorSubsystem.override_Lower_conveyor(Constants.UPPER_CONVEYOR_SPEED);
+    }
     
   }
 
