@@ -37,13 +37,13 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_conveyorSubsystem.move_conveyors(Constants.INTAKE_SPEED);
+    m_conveyorSubsystem.move_intake_motor(Constants.INTAKE_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_conveyorSubsystem.move_conveyors(0);
+    m_conveyorSubsystem.move_intake_motor(0);
   }
 
   // Returns true when the command should end.
