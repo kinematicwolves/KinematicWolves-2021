@@ -24,6 +24,7 @@ public class ShootBall extends CommandBase {
   private final ShooterSubsystem m_shooterSubsystem;
   private final VisionSubsystem m_visionSubsystem;
   private final ConveyorSubsystem m_conveyorSubsystem;
+  
 
   public ShootBall(ShooterSubsystem shooterSubsystem, VisionSubsystem visionSubsystem, ConveyorSubsystem conveyorSubsystem ) {
     // Use addRequirements() here to declare subsystem dependencies.
