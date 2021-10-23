@@ -9,17 +9,19 @@ public class MoveTopConveyor extends CommandBase {
 
     // The subsytem command runs on the following:
     private final ConveyorSubsystem m_conveyorSubsystem;
+    double m_speed;
 
-  public MoveTopConveyor(ConveyorSubsystem subsystem) {
+  public MoveTopConveyor(ConveyorSubsystem subsystem,double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_conveyorSubsystem = subsystem;
+    m_speed= speed;
     addRequirements(m_conveyorSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_conveyorSubsystem.move_top_conveyor(0.6);
+    m_conveyorSubsystem.move_top_conveyor(m_speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
