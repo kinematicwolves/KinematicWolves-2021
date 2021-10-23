@@ -102,7 +102,7 @@ public class RobotContainer {
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
     final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
     final JoystickButton m_r1Button = new JoystickButton(manipulatorController, Constants.R1);
-
+    
    
     m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, -0.6)); // Works
     m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, 0.6));
@@ -123,11 +123,11 @@ public class RobotContainer {
     final JoystickButton d_r2Button = new JoystickButton(driverController, Constants.R2);
    
     d_aButton.whileHeld(new RunIntake(m_conveyorSubsystem));
-    d_r1Button.whileHeld(new ShiftGear(m_driveTrain)); 
-    d_xButton.whileHeld(new TurnLimelightOff(m_visionSubsystem));
+    //d_r1Button.whileHeld(new ShiftGear(m_driveTrain)); 
+    d_xButton.whileHeld(new  ActuateIntake(m_conveyorSubsystem)); 
     d_yButton.whenPressed(new TurnLimelightOn(m_visionSubsystem));
     d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem)); // works
-    //d_r1Button.whenPressed(new TurnLimelightOn(m_visionSubsystem));
+    //d_r1Button.whenPressed(new ActuateIntake(m_conveyorSubsystem)); 
     d_r2Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
 
   }
