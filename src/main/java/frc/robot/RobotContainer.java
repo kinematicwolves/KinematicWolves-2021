@@ -35,6 +35,9 @@ import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.commands.lastminutecommands.*;
 import frc.robot.commands.MoveLowerConveyor;
 import frc.robot.commands.IntakeBall;
+import frc.robot.commands.MoveElevator;
+import frc.robot.subsystems.ElevatorSubsystem;
+
 
 
 
@@ -42,7 +45,7 @@ import frc.robot.commands.IntakeBall;
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
+ * (including subsystems, commands, and gibutton mappings) should be declared here.
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -104,15 +107,17 @@ public class RobotContainer {
     final JoystickButton m_r1Button = new JoystickButton(manipulatorController, Constants.R1);
     
    
-    m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, -0.6)); // Works
-    m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, 0.6));
+    //m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, -0.6)); // Works
+    //m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, 0.6));
     m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, -0.6)); //need to add negative values
     m_r1Button.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
 
     //m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // works 
     //m_r2Button.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem)); // Does not work (10/9)
     m_yButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, 0.6));
-    
+    //m_aButton.whileHeld(new MoveElevator());
+
+
     // Driver Controller
  
     final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
@@ -124,10 +129,10 @@ public class RobotContainer {
    
     d_aButton.whileHeld(new RunIntake(m_conveyorSubsystem));
     //d_r1Button.whileHeld(new ShiftGear(m_driveTrain)); 
-    d_xButton.whileHeld(new  ActuateIntake(m_conveyorSubsystem)); 
+    d_xButton.whenPressed(new  ActuateIntake(m_conveyorSubsystem)); 
     d_yButton.whenPressed(new TurnLimelightOn(m_visionSubsystem));
     d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem)); // works
-    //d_r1Button.whenPressed(new ActuateIntake(m_conveyorSubsystem)); 
+    d_r1Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
     d_r2Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
 
   }
