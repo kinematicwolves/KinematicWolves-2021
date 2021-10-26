@@ -53,7 +53,7 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  //private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   
   private final UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
   
@@ -130,9 +130,9 @@ public class RobotContainer {
     d_aButton.whileHeld(new RunIntake(m_conveyorSubsystem));
     //d_r1Button.whileHeld(new ShiftGear(m_driveTrain)); 
     d_xButton.whenPressed(new  ActuateIntake(m_conveyorSubsystem)); 
-    d_yButton.whenPressed(new TurnLimelightOn(m_visionSubsystem));
+    d_yButton.whileHeld(new MoveElevator(m_elevatorSubsystem,-0.2));
     d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem)); // works
-    d_r1Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
+    d_r1Button.whileHeld(new MoveElevator(m_elevatorSubsystem,0.2)); 
     d_r2Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
 
   }

@@ -29,7 +29,7 @@ public void elevatorSubsystem() {
 
   
   public void moveElevatorOpenLoop(double speed){
-    SmartDashboard.putNumber("Elevator speed", speed);
+    //SmartDashboard.putNumber("Elevator speed", speed);
     m_elevatorMotor.set(speed);
   }
 
