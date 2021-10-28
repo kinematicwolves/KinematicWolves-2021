@@ -107,8 +107,8 @@ public class RobotContainer {
     final JoystickButton m_r1Button = new JoystickButton(manipulatorController, Constants.R1);
     
    
-    //m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, -0.6)); // Works
-    //m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, 0.6));
+    m_aButton.whileHeld(new MoveTopConveyor(m_conveyorSubsystem, -0.6)); // Works
+    m_xButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, 0.6));
     m_bButton.whileHeld(new MoveLowerConveyor(m_conveyorSubsystem, -0.6)); //need to add negative values
     m_r1Button.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
 
@@ -125,15 +125,15 @@ public class RobotContainer {
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
     final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
     final JoystickButton d_r1Button = new JoystickButton(driverController, Constants.R1);
-    final JoystickButton d_r2Button = new JoystickButton(driverController, Constants.R2);
+    final JoystickButton d_l1Button = new JoystickButton(driverController, Constants.L1);
    
     d_aButton.whileHeld(new RunIntake(m_conveyorSubsystem));
     //d_r1Button.whileHeld(new ShiftGear(m_driveTrain)); 
     d_xButton.whenPressed(new  ActuateIntake(m_conveyorSubsystem)); 
-    d_yButton.whileHeld(new MoveElevator(m_elevatorSubsystem,-0.2));
+    d_yButton.whileHeld(new MoveElevator(m_elevatorSubsystem,-0.4));
     d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem)); // works
-    d_r1Button.whileHeld(new MoveElevator(m_elevatorSubsystem,0.2)); 
-    d_r2Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
+    d_r1Button.whileHeld(new MoveElevator(m_elevatorSubsystem,0.4)); 
+    d_l1Button.whenPressed(new TurnLimelightOff(m_visionSubsystem)); 
 
   }
 
